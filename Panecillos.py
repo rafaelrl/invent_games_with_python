@@ -22,7 +22,7 @@ for i in range(3):
 
 #print(numero)
 
-intentos = 10
+
 
 
 def numeroJugador(jugador):
@@ -31,31 +31,43 @@ def numeroJugador(jugador):
 		jugador2.append(jugador[i])
 	return jugador2
 
+def rejugar():
+	pregunta = input('¿Quieres volver a jugar? (S/N) ')
+	if pregunta.upper() ==  'S':
+		main()
+	else:
+		print('Hasta luego')
 
 
 
-while intentos >= 1:
-	
-	jugador = input('Escribe un número de 3 cifras: ')
-	while len(jugador) != 3:
-		jugador = input('Tu número es incorrecto. Por favor, escribe un número de TRES cifras: ')
-	a = numeroJugador(jugador)
-	
-	resultado = [0, 0, 0]
-	if a== numero:
-		print('Has ganado')
-		break
-	for i in range(3):
-		if a[i] == numero[i]:
-			resultado[i] = 'Fermi'
-			
-		elif a[i] in numero:
-			resultado[i] = 'Pico'
-			
-		else:
-			resultado[i] = 'Panecillos'
-	intentos -= 1
-	print(resultado[0], resultado[1], resultado[2])
-	print('Te quedan {} intento(s)'.format(intentos))
+def main():
+	intentos = 10
+	while intentos >= 1:
 		
-print('¡Has perdido!')		
+		jugador = input('Escribe un número de 3 cifras: ')
+		while len(jugador) != 3 or not jugador.isdigit():
+			jugador = input('Tu número es incorrecto. Por favor, escribe un número de TRES cifras: ')
+		a = numeroJugador(jugador)
+		
+		resultado = [0, 0, 0]
+		if a== numero:
+			print('Has ganado')
+			break
+		for i in range(3):
+			if a[i] == numero[i]:
+				resultado[i] = 'Fermi'
+				
+			elif a[i] in numero:
+				resultado[i] = 'Pico'
+				
+			else:
+				resultado[i] = 'Panecillos'
+		intentos -= 1
+		print(resultado[0], resultado[1], resultado[2])
+		print('Te quedan {} intento(s)'.format(intentos))
+		if intentos == 0:
+			print('¡Has perdido!')	
+	rejugar()	
+
+if __name__ == '__main__':
+	main()
