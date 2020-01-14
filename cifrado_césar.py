@@ -1,5 +1,5 @@
 
-abecedario = list(chr(32)) + list(chr(x) for x in range(ord('A'), ord('['))) + list(chr(x) for x in range(ord('a'), ord('{')))
+abecedario = list(chr(x) for x in range(ord(chr(32)), ord(chr(126))))
 print(abecedario)
 modo = input('¿Deseas encriptar o desencriptar un mensaje? ')
 
@@ -11,15 +11,18 @@ def encDesenc(modo):
 	else:
 		print('Lo siento. No ha introducido una opción correcta. Saliendo del programa. . .')
 
-def escribirMensaje():
+def escribirMensaje(modo):
 	mensaje = input('Escribe tu mensaje: ')
-	return mensaje
+	if modo == 'encriptar':
+		return mensaje.upper()
+	elif modo == 'desencriptar':
+		return mensaje
 
 def desplazar():
 	desplazamiento = int(input('Escribe el número de clave: '))
 	return desplazamiento
 
-a = escribirMensaje()
+a = escribirMensaje(modo)
 b = desplazar()
 encDesenc(modo)
 
@@ -27,7 +30,7 @@ def cifrar(a, b):
 	if encDesenc(modo) == 'encriptar':
 		encriptado = []
 		for i in a:
-			if i.upper() in abecedario:
+			if i in abecedario:
 				print(abecedario.index(i))
 				nueva_posicion = int(abecedario.index(i)) + b
 				#print('Nueva posición: ', type(nueva_posicion))
